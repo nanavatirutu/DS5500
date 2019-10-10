@@ -890,7 +890,7 @@ bmi = bmi\
 # dropped values that gave exceptions while converting
 bmi = bmi[bmi.alpha2 != 'VA']
 bmi = bmi[bmi.alpha2.notnull()]
-bmi = bmi[bmi.alpha2 != 'TL']
+bmi = bmi[bmi.alpha2 != 'TL'].rename(columns={'body_mass_index_bmi_men_kgperm2':'BMI_men','body_mass_index_bmi_women_kgperm2':'BMI_women'})
 
 # Converting alpha2 names (country codes) to continent names
 bmi.alpha2 = bmi.alpha2.apply(country_alpha2_to_continent_code)
@@ -898,7 +898,87 @@ bmi.alpha2 = bmi.alpha2.apply(country_alpha2_to_continent_code)
 
 
 ```python
-bmi = bmi.groupby(['alpha2','time']).mean().reset_index().rename(columns={'body_mass_index_bmi_men_kgperm2':'BMI_men','body_mass_index_bmi_women_kgperm2':'BMI_women'})
+bmi.head()
+```
+
+
+
+
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>geo</th>
+      <th>time</th>
+      <th>BMI_men</th>
+      <th>BMI_women</th>
+      <th>alpha2</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>afg</td>
+      <td>1980</td>
+      <td>21.49</td>
+      <td>20.44</td>
+      <td>AS</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>afg</td>
+      <td>1981</td>
+      <td>21.47</td>
+      <td>20.48</td>
+      <td>AS</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>afg</td>
+      <td>1982</td>
+      <td>21.45</td>
+      <td>20.52</td>
+      <td>AS</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>afg</td>
+      <td>1983</td>
+      <td>21.44</td>
+      <td>20.56</td>
+      <td>AS</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>afg</td>
+      <td>1984</td>
+      <td>21.43</td>
+      <td>20.61</td>
+      <td>AS</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+
+
+
+```python
+bmi = bmi.groupby(['alpha2','time']).mean().reset_index()
 ```
 
 
@@ -975,6 +1055,40 @@ bmi.head()
 
 
 
+####  Distribution of BMI in Men and Women
+
+
+```python
+sns.distplot(bmi.BMI_men)
+```
+
+
+
+
+    <matplotlib.axes._subplots.AxesSubplot at 0x1a2c6384e0>
+
+
+
+
+![png](output_44_1.png)
+
+
+
+```python
+sns.distplot(bmi.BMI_women)
+```
+
+
+
+
+    <matplotlib.axes._subplots.AxesSubplot at 0x1a2bfa49e8>
+
+
+
+
+![png](output_45_1.png)
+
+
 
 ```python
 bmi[bmi.alpha2 == 'AF'].set_index('time').plot()
@@ -988,7 +1102,7 @@ plt.show()
 ```
 
 
-![png](output_42_0.png)
+![png](output_46_0.png)
 
 
 
@@ -1004,7 +1118,7 @@ plt.show()
 ```
 
 
-![png](output_43_0.png)
+![png](output_47_0.png)
 
 
 
@@ -1020,7 +1134,7 @@ plt.show()
 ```
 
 
-![png](output_44_0.png)
+![png](output_48_0.png)
 
 
 
@@ -1036,7 +1150,7 @@ plt.show()
 ```
 
 
-![png](output_45_0.png)
+![png](output_49_0.png)
 
 
 
@@ -1052,7 +1166,7 @@ plt.show()
 ```
 
 
-![png](output_46_0.png)
+![png](output_50_0.png)
 
 
 
@@ -1068,7 +1182,7 @@ plt.show()
 ```
 
 
-![png](output_47_0.png)
+![png](output_51_0.png)
 
 
 #### We can observe that the trend in general Body mass index of men is less than women in all the continents however in Europe BMI of men is more than women after 1980s as per the dataset it is interesting to know that increase in BMI is a steep curve however it is not likewise for women.
