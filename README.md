@@ -869,7 +869,7 @@ print()
 
 * We can observe that life expectancy and GDP are improving with time and child mortality is reducing. Overall the results are good and as per the expectation. 
 
-* Also we can observe correlation between life expectancy and gdp/capita
+* Also we can observe higher correlation between life expectancy and gdp/capita
 
 ### Problem 4
 Choose two variables you have not investigated yet, and visualize their distributions, their relationship with
@@ -880,8 +880,198 @@ Interpret your visualizations, noting any trends and/or outliers.
 
 
 ```python
+bmi_men = pd.read_csv("ddf--datapoints--body_mass_index_bmi_men_kgperm2--by--geo--time.csv")
+bmi_women= pd.read_csv("ddf--datapoints--body_mass_index_bmi_women_kgperm2--by--geo--time.csv")
+bmi = pd.merge(bmi_men, bmi_women, on = ['geo', 'time']) 
+bmi = bmi\
+        .merge(geo_mapping[['geo','iso3166_1_alpha2']],on = 'geo')\
+        .rename(columns = {'iso3166_1_alpha2':'alpha2'})
 
+# dropped values that gave exceptions while converting
+bmi = bmi[bmi.alpha2 != 'VA']
+bmi = bmi[bmi.alpha2.notnull()]
+bmi = bmi[bmi.alpha2 != 'TL']
+
+# Converting alpha2 names (country codes) to continent names
+bmi.alpha2 = bmi.alpha2.apply(country_alpha2_to_continent_code)
 ```
+
+
+```python
+bmi = bmi.groupby(['alpha2','time']).mean().reset_index().rename(columns={'body_mass_index_bmi_men_kgperm2':'BMI_men','body_mass_index_bmi_women_kgperm2':'BMI_women'})
+```
+
+
+```python
+bmi.head()
+```
+
+
+
+
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>alpha2</th>
+      <th>time</th>
+      <th>BMI_men</th>
+      <th>BMI_women</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>AF</td>
+      <td>1980</td>
+      <td>21.131538</td>
+      <td>21.553846</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>AF</td>
+      <td>1981</td>
+      <td>21.171154</td>
+      <td>21.637308</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>AF</td>
+      <td>1982</td>
+      <td>21.212692</td>
+      <td>21.718654</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>AF</td>
+      <td>1983</td>
+      <td>21.249423</td>
+      <td>21.795192</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>AF</td>
+      <td>1984</td>
+      <td>21.285962</td>
+      <td>21.871731</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+
+
+
+```python
+bmi[bmi.alpha2 == 'AF'].set_index('time').plot()
+
+plt.title("Change in Avg. BMI for men and women in Africa.", fontsize=16, fontweight='bold')
+
+plt.xlabel("Time")
+plt.ylabel("BMI")
+
+plt.show()
+```
+
+
+![png](output_42_0.png)
+
+
+
+```python
+bmi[bmi.alpha2 == 'AS'].set_index('time').plot()
+
+plt.title("Change in Avg. BMI for men and women in Asia", fontsize=16, fontweight='bold')
+
+plt.xlabel("Time")
+plt.ylabel("BMI")
+
+plt.show()
+```
+
+
+![png](output_43_0.png)
+
+
+
+```python
+bmi[bmi.alpha2 == 'OC'].set_index('time').plot()
+
+plt.title("Change in Avg. BMI for men and women in Australia", fontsize=16, fontweight='bold')
+
+plt.xlabel("Time")
+plt.ylabel("BMI")
+
+plt.show()
+```
+
+
+![png](output_44_0.png)
+
+
+
+```python
+bmi[bmi.alpha2 == 'NA'].set_index('time').plot()
+
+plt.title("Change in Avg. BMI for men and women in North America", fontsize=16, fontweight='bold')
+
+plt.xlabel("Time")
+plt.ylabel("BMI")
+
+plt.show()
+```
+
+
+![png](output_45_0.png)
+
+
+
+```python
+bmi[bmi.alpha2 == 'SA'].set_index('time').plot()
+
+plt.title("Change in Avg. BMI for men and women in South America", fontsize=16, fontweight='bold')
+
+plt.xlabel("Time")
+plt.ylabel("BMI")
+
+plt.show()
+```
+
+
+![png](output_46_0.png)
+
+
+
+```python
+bmi[bmi.alpha2 == 'EU'].set_index('time').plot()
+
+plt.title("Change in Avg. BMI for men and women in Europe", fontsize=16, fontweight='bold')
+
+plt.xlabel("Time")
+plt.ylabel("BMI")
+
+plt.show()
+```
+
+
+![png](output_47_0.png)
+
+
+#### We can observe that the trend in general Body mass index of men is less than women in all the continents however in Europe BMI of men is more than women after 1980s as per the dataset it is interesting to know that increase in BMI is a steep curve however it is not likewise for women.
 
 ### Problem 5
 Did you use static or interactive plots to answer the previous problems?
