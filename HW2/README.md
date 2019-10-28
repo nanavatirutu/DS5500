@@ -49,7 +49,7 @@ The plot used to describe across continents is more or less similar the only dif
 Link to Prathwish Shetty's plot:
 https://colab.research.google.com/github/prathwishshetty/DS5500-Homework-1/blob/master/ds5500_hw1.ipynb
 
-The plots used to describe with time as per different regions gives good high level idea about different regions but doesn't account for all the continents. It is more or less similar and does effectively visualize what was asked.
+The plots used to describe with time as per different regions gives good high level idea about different regions but doesn't account for all the continents. It is more or less similar as both the plots show line plots of change in Life Expectancy, Child Mortality and GDP (per capita income) over time. The only difference is that one talks about regions and one plot is continent specific. I think both the plots effectively do visualize what was asked however differs in levels of specificity.
 
 
 ### Problem 4
