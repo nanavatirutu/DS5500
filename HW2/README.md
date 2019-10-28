@@ -300,12 +300,8 @@ pd.DataFrame({'time':coef[0][0],'gdp_log':coef[0][1],'bias':bias},index = ['coef
 </div>
 
 
-
-#### For the model with best 𝑅² value we can Quantify the relationship between Life expectancy and GDP as:
-#### $$ Life \ Expectancy \propto 4.787211*log(GDP)   $$
-
 ####  Change in average life expectancy for a continent across time
-
+![png](Answer4.png)
 
 ```python
 grouped_df = gdp_le.groupby(['world_4region','time']).mean().reset_index()[['world_4region','time','gdppercapita_us_inflation_adjusted','life_expectancy_years']]
@@ -613,12 +609,6 @@ pd.DataFrame({'time':coef[0][0],'gdp_log':coef[0][1],'bias':bias},index = ['coef
 </table>
 </div>
 
-
-
-#### For the model with best 𝑅² value we can Quantify the relationship between Life expectancy and GDP as:
-#### $$ log(Child \ Mortality) \propto -0.624748*log(GDP)   $$
-#### $$ \sim log(Child \ Mortality) \propto 0.624748*log(1/GDP)   $$
-* We can say that with increase in GDP (per capita income) the child mortality rate reduces hence they have inverse relationship.
 
 ![png](Answer5.png)
 
