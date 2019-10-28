@@ -620,6 +620,7 @@ pd.DataFrame({'time':coef[0][0],'gdp_log':coef[0][1],'bias':bias},index = ['coef
 #### $$ \sim log(Child \ Mortality) \propto 0.624748*log(1/GDP)   $$
 * We can say that with increase in GDP (per capita income) the child mortality rate reduces hence they have inverse relationship.
 
+![png](Answer5.png)
 
 ```python
 grouped_df = gdp_cm.groupby(['world_4region','time']).mean().reset_index()[['world_4region','time','child_mortality']]
