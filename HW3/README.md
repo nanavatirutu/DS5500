@@ -306,7 +306,7 @@ _ = plt.xticks(
     horizontalalignment='right',
     fontweight='light' 
 )
-_ = plt.title('States with high federal funding per student.', fontsize = 16)
+_ = plt.title('States with most Debt per student.', fontsize = 16)
 ```
 
 
