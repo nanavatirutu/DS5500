@@ -172,7 +172,7 @@ plt.show()
 ```
 
 
-![png](output_6_0.png)
+![png](Images/output_6_0.png)
 
 
 
@@ -189,7 +189,7 @@ plt.show()
 ```
 
 
-![png](output_7_0.png)
+![png](Images/output_7_0.png)
 
 
 ##### We can observe maximum cut proportion is 0.38 that is 38%. Barre Supervisory union is most affected by budget cut. 
@@ -444,7 +444,7 @@ plt.show()
 ```
 
 
-![png](output_15_0.png)
+![png](Images/output_15_0.png)
 
 
 #### Comment on whether the the distributions appear to be the same or different. Did your selection include any hidden biases, or manage to avoid them?
@@ -650,7 +650,7 @@ plt.ylabel('Proportion of disabled students with no revenue cut')
 
 
 
-![png](output_23_1.png)
+![png](Images/output_23_1.png)
 
 
 #### Comment on whether the the distributions appear to be the same or different. Did your selection include any hidden biases, or manage to avoid them?
